@@ -2,13 +2,8 @@ import Navbar from '../components/navbar';
 import ProductCard from '../components/product-card';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import Radio from '@material-ui/core/Radio';
-import Paper from '@material-ui/core/Paper';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
   },
@@ -16,8 +11,8 @@ const useStyles = makeStyles((theme) => ({
     height: 140,
     width: 100,
   },
-  control: {
-    // padding: theme.spacing(1),
+  mission: {
+    fontSize: '1.2rem',
   },
 }));
 
@@ -33,7 +28,7 @@ const Homepage = () => {
       <Navbar />
       <section>
         <h1>Our Mission</h1>
-        <p>
+        <p className={classes.mission}>
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever
           since the 1500s, when an unknown printer took a galley of type and
@@ -51,7 +46,7 @@ const Homepage = () => {
         <Grid container className={classes.root} spacing={2}>
           <Grid item xs={12}>
             <Grid container justify="flex-start" spacing={spacing}>
-              {[0, 1, 2, 3].map((value) => (
+              {[0, 1, 2, 3, 4].map((value) => (
                 <Grid key={value} item>
                   <ProductCard />
                 </Grid>
