@@ -1,5 +1,5 @@
 import Navbar from '../components/Navbar';
-import ProductCard from '../components/product-card';
+import ProductCard from '../components/ProductCard';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
