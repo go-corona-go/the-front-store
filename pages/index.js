@@ -1,4 +1,3 @@
-import Navbar from '../components/navbar';
 import Homepage from './homepage';
 
 const Home = () => <Homepage />;
