@@ -10,39 +10,40 @@ const useStyles = makeStyles(() => ({
     flexGrow: 1,
     background: '#fff',
     minHeight: '100vh',
-    
+    height: '100%',
+    borderTopRightRadius: '20px',
+    borderBottomRightRadius: '20px',
   },
   title: {
     fontFamily: 'Raleway',
     fontWeight: 600,
     fontSize: '24px',
     lineHeight: '28px',
-    padding: '0 23px'
+    padding: '0 23px',
   },
   text: {
     fontSize: '18px',
-    lineHeight: '25px'
+    lineHeight: '25px',
   },
-  item:{
-    justifyContent: 'flex-start'
+  item: {
+    justifyContent: 'flex-start',
   },
-  icon: {
-  }
+  icon: {},
 }));
 
-const x = ['Mask', 'PPE', 'Gloves', 'Sanitation Products'];
-const Filters = () => {
+const data = ['Mask', 'PPE', 'Gloves', 'Sanitation Products'];
+const Filters = ({toggleFilter}) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
       <p className={classes.title}>Categories</p>
       <List component="nav">
-        <ListItem button className={classes.item}>
-          {/* <ListItemIcon className={classes.icon}> */}
+        {data.map((category) => (
+          <ListItem button className={classes.item} onClick={() => toggleFilter(false)}>
             <ChevronRight className={classes.icon} />
-          {/* </ListItemIcon> */}
-          <ListItemText className={classes.text} primary="Sent mail" />
-        </ListItem>
+            <ListItemText className={classes.text} primary={category} />
+          </ListItem>
+        ))}
       </List>
     </div>
   );
