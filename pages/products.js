@@ -1,106 +1,106 @@
-import { Grid, GridList, GridListTile, makeStyles } from "@material-ui/core";
-import { useState } from "react";
-import Layout from "../components/Layout";
-import Filters from "../components/Filters";
+import { Grid, GridList, GridListTile, makeStyles } from '@material-ui/core';
+import { useState } from 'react';
+import Layout from '../components/Layout';
+import Filters from '../components/Filters';
 
 const data = [
   {
-    name: "Very bvery big name",
-    priceRange: "SU @1000 - $2000",
+    name: 'Very bvery big name',
+    priceRange: 'SU @1000 - $2000',
   },
   {
-    name: "Very bvery big name",
-    priceRange: "SU @1000 - $2000",
+    name: 'Very bvery big name',
+    priceRange: 'SU @1000 - $2000',
   },
   {
-    name: "Very bvery big name",
-    priceRange: "SU @1000 - $2000",
+    name: 'Very bvery big name',
+    priceRange: 'SU @1000 - $2000',
   },
   {
-    name: "Very bvery big name",
-    priceRange: "SU @1000 - $2000",
+    name: 'Very bvery big name',
+    priceRange: 'SU @1000 - $2000',
   },
   {
-    name: "Very bvery big name",
-    priceRange: "SU @1000 - $2000",
+    name: 'Very bvery big name',
+    priceRange: 'SU @1000 - $2000',
   },
   {
-    name: "Very bvery big name",
-    priceRange: "SU @1000 - $2000",
+    name: 'Very bvery big name',
+    priceRange: 'SU @1000 - $2000',
   },
 ];
 
 const useStyles = makeStyles((theme) => ({
   list: {
-    padding: "40px",
+    padding: '40px',
   },
   sectionDesktop: {
-    display: "none",
-    padding: "40px",
-    [theme.breakpoints.up("md")]: {
-      display: "flex",
+    display: 'none',
+    padding: '40px',
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
     },
   },
   tile: {
-    borderRadius: "20px",
-    padding: "20px!important",
-    boxSizing: "border-box",
-    display: "flex",
-    flexDirection: "column",
+    borderRadius: '20px',
+    padding: '20px!important',
+    boxSizing: 'border-box',
+    display: 'flex',
+    flexDirection: 'column',
   },
   link: {
-    display: "flex",
+    display: 'flex',
     fontWeight: 600,
-    fontSize: "24px",
-    lineHeight: "28px",
-    paddingLeft: "18px",
-    textDecorationLine: "underline",
+    fontSize: '24px',
+    lineHeight: '28px',
+    paddingLeft: '18px',
+    textDecorationLine: 'underline',
 
-    color: "#64A1F4",
-    [theme.breakpoints.up("md")]: {
-      display: "none",
+    color: '#64A1F4',
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
     },
   },
   sectionMobile: {
-    display: "flex",
-    padding: "20px",
-    [theme.breakpoints.up("md")]: {
-      display: "none",
+    display: 'flex',
+    padding: '20px',
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
     },
   },
   showForMobile: {
-    display: "flex",
-    [theme.breakpoints.up("md")]: {
-      display: "none",
+    display: 'flex',
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
     },
   },
   showForDesktop: {
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "flex",
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
     },
   },
   img: {
-    maxHeight: "214px",
-    maxWidth: "214px",
+    maxHeight: '214px',
+    maxWidth: '214px',
     height: '100%',
     width: '100%',
-    objectFit: "cover",
-    justifyContent: "center",
+    objectFit: 'cover',
+    justifyContent: 'center',
     textAlign: 'center'
   },
   productName: {
-    fontSize: "14px",
-    lineHeight: "19px",
-    color: "#000000",
-    marginBottom: "12px",
+    fontSize: '14px',
+    lineHeight: '19px',
+    color: '#000000',
+    marginBottom: '12px',
     marginTop: '12px'
   },
   priceRange: {
-    fontWeight: "600",
-    fontSize: "14px",
-    lineHeight: "19px",
-    color: "#000000",
+    fontWeight: '600',
+    fontSize: '14px',
+    lineHeight: '19px',
+    color: '#000000',
   },
 }));
 
@@ -138,10 +138,10 @@ const Home = () => {
               >
                 <div
                   style={{
-                    background: "#fff",
-                    width: "100%",
-                    height: "100%",
-                    padding: "20px",
+                    background: '#fff',
+                    width: '100%',
+                    height: '100%',
+                    padding: '20px',
                     boxSizing: 'border-box'
                   }}
                 >
