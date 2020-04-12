@@ -30,15 +30,24 @@ const useStyles = makeStyles(() => ({
   icon: {},
 }));
 
-const data = ['Mask', 'PPE', 'Gloves', 'Sanitation Products'];
-const Filters = ({toggleFilter}) => {
+export const CATEGORY_ENUM = ['Mask', 'Sanitizer'];
+
+const Filters = ({ toggleFilter, changeCategory }) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
       <p className={classes.title}>Categories</p>
       <List component="nav">
-        {data.map((category, i) => (
-          <ListItem button className={classes.item} key={i} onClick={() => toggleFilter(false)}>
+        {CATEGORY_ENUM.map((category, i) => (
+          <ListItem
+            button
+            className={classes.item}
+            key={i}
+            onClick={() => {
+              changeCategory([`${category}`]);
+              toggleFilter(false);
+            }}
+          >
             <ChevronRight className={classes.icon} />
             <ListItemText className={classes.text} primary={category} />
           </ListItem>

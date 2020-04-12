@@ -59,6 +59,7 @@ const ProductCard = ({ product }) => {
         <div className={classes.container}>
           <div className={classes.imageContainer}>
             <img
+            // TODO: Change the url to url from API
               src={`https://images.pexels.com/photos/1767434/pexels-photo-1767434.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`}
               alt={product.name}
               className={classes.img}

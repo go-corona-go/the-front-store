@@ -1,41 +1,21 @@
+/* eslint-disable babel/camelcase */
 import { Grid, GridList, makeStyles } from '@material-ui/core';
-import { useState } from 'react';
+import { gql, useLazyQuery } from '@apollo/client';
+import { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
-import Filters from '../components/Filters';
+import Filters, {CATEGORY_ENUM} from '../components/Filters';
 import ProductCard from '../components/ProductCard';
 
-const data = [
-  {
-    id: 1,
-    name: 'Very bvery big name',
-    priceRange: 'SU @1000 - $2000',
-  },
-  {
-    id: 2,
-    name: 'Very bvery big name',
-    priceRange: 'SU @1000 - $2000',
-  },
-  {
-    id: 3,
-    name: 'Very bvery big name',
-    priceRange: 'SU @1000 - $2000',
-  },
-  {
-    id: 4,
-    name: 'Very bvery big name',
-    priceRange: 'SU @1000 - $2000',
-  },
-  {
-    id: 5,
-    name: 'Very bvery big name',
-    priceRange: 'SU @1000 - $2000',
-  },
-  {
-    id: 6,
-    name: 'Very bvery big name',
-    priceRange: 'SU @1000 - $2000',
-  },
-];
+const GET_ALL_PRODUCTS = gql`
+  query getAllProducts($category: [String!]) {
+    inventory_items(where: {category: {_in: $category}}) {
+      category
+      id
+      name
+      image_link
+    }
+  }
+`;
 
 const useStyles = makeStyles((theme) => ({
   list: {
@@ -85,6 +65,25 @@ const useStyles = makeStyles((theme) => ({
 const Home = () => {
   const classes = useStyles();
   const [isVisble, toggleFilter] = useState(false);
+  const [category, changeCategory] = useState(CATEGORY_ENUM);
+  const [executeQuery, { data, loading, error }] = useLazyQuery(
+    GET_ALL_PRODUCTS,
+    {
+      variables: {
+        category
+      }
+    }
+  );
+  
+  useEffect(() => {
+    executeQuery();
+  }, [category]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error...</div>;
+  if (!data) return <div>No Products available</div>;
+
+  const { inventory_items } = data;
   return (
     <Layout>
       <Grid container>
@@ -96,7 +95,7 @@ const Home = () => {
           lg={2}
           className={isVisble ? classes.showForMobile : classes.showForDesktop}
         >
-          <Filters toggleFilter={toggleFilter} />
+          <Filters toggleFilter={toggleFilter} changeCategory={changeCategory} />
         </Grid>
         <Grid container item xs={12} md={9} lg={10}>
           <p className={classes.link} onClick={() => toggleFilter(true)}>
@@ -108,7 +107,7 @@ const Home = () => {
             spacing={20}
             className={classes.sectionDesktop}
           >
-            {data.map((product) => (
+            {inventory_items.map((product) => (
               <ProductCard product={product} />
             ))}
           </GridList>
@@ -118,9 +117,8 @@ const Home = () => {
             spacing={20}
             className={classes.sectionMobile}
           >
-            {data.map((product) => (
+            {inventory_items.map((product) => (
               <ProductCard product={product} />
-              
             ))}
           </GridList>
         </Grid>
