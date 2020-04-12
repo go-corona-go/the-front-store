@@ -4,6 +4,8 @@ import { useState } from 'react';
 import Navbar from '../components/Navbar';
 import ProductCard from '../components/ProductCard';
 import { gql, useQuery } from '@apollo/client';
+import ArrowForward from '@material-ui/icons/ArrowForward';
+import Link from 'next/link';
 
 const GET_ALL_PRODUCTS = gql`
   query getAllProducts {
@@ -50,6 +52,19 @@ const useStyles = makeStyles(() => ({
   },
   mission: {
     fontSize: '1.2rem',
+  },
+  allProducts: {
+    position: 'relative',
+  },
+  forwardButton: {
+    display: 'flex',
+    alignItems: 'center',
+    position: 'absolute',
+    right: '10px',
+    margin: '20px',
+    fontSize: '20px',
+    fontWeight: '600',
+    cursor: 'pointer',
   },
 }));
 
@@ -101,6 +116,14 @@ const Homepage = () => {
             </Grid>
           </Grid>
         </section>
+        <Link href="/products">
+          <div className={classes.allProducts}>
+            <div className={classes.forwardButton}>
+              <ArrowForward />
+              <span style={{ marginLeft: '10px' }}>{`See more`}</span>
+            </div>
+          </div>
+        </Link>
       </div>
     </>
   );
