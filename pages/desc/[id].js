@@ -49,22 +49,22 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     marginTop: '20px',
     [theme.breakpoints.up('md')]: {
-      maxHeight: '214px',
-      maxWidth: '214px',
+      maxHeight: '300px',
+      maxWidth: '300px',
       marginTop: '0px',
     },
   },
   imageContainer: {
     display: 'flex',
     alignItems: 'center',
-    height: '133',
+    height: '133px',
     maxHeight: '133px',
     width: '100%',
     justifyContent: 'center',
     objectFit: 'contain',
     [theme.breakpoints.up('md')]: {
-      height: '214px',
-      maxHeight: '214',
+      height: '300px',
+      maxHeight: '300px',
     },
   },
   descContainer: {
