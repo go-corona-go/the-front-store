@@ -8,14 +8,14 @@ import Layout from '../../components/Layout';
 
 const GET_PRODUCT_BY_ID = gql`
   query getProductById($id: Int!) {
-    inventory_buyer_view(where: {id: {_eq: $id}}) {
+    inventory_buyer_view(where: { id: { _eq: $id } }) {
       category
-    id
-    description
-    max_price
-    min_price
-    name
-    image_link
+      id
+      description
+      max_price
+      min_price
+      name
+      image_link
     }
   }
 `;
@@ -198,7 +198,7 @@ const ProductDescription = () => {
                 <div className={classes.imageContainer}>
                   <img
                     // TODO Change link
-                    src={`https://images.pexels.com/photos/1767434/pexels-photo-1767434.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`}
+                    src={inventory_buyer_view[0].image_link}
                     alt={`Image`}
                     className={classes.img}
                   />
@@ -211,7 +211,8 @@ const ProductDescription = () => {
                   </div>
                   <div>
                     <div className={classes.price}>
-                     {inventory_buyer_view[0].min_price} - {inventory_buyer_view[0].max_price}
+                      {inventory_buyer_view[0].min_price} -{' '}
+                      {inventory_buyer_view[0].max_price}
                     </div>
                     <div className={classes.actionContainer}>
                       <div className={classes.qtyContainer}>
@@ -231,8 +232,8 @@ const ProductDescription = () => {
               <Grid item xs={12}>
                 <div className={classes.desc}>
                   {inventory_buyer_view[0].description}
-              </div>
-                </Grid>
+                </div>
+              </Grid>
             </Grid>
           </div>
         </Grid>
