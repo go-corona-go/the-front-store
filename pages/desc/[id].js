@@ -1,7 +1,24 @@
+/* eslint-disable babel/camelcase */
 import { Grid, makeStyles } from '@material-ui/core';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import Link from 'next/link';
+import { gql, useQuery } from '@apollo/client';
+import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
+
+const GET_PRODUCT_BY_ID = gql`
+  query getProductById($id: Int!) {
+    inventory_buyer_view(where: {id: {_eq: $id}}) {
+      category
+    id
+    description
+    max_price
+    min_price
+    name
+    image_link
+    }
+  }
+`;
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -34,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       maxHeight: '214px',
       maxWidth: '214px',
-      marginTop: '0px'
+      marginTop: '0px',
     },
   },
   imageContainer: {
@@ -68,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '25px',
     flexDirection: 'column',
     [theme.breakpoints.up('md')]: {
-      flexDirection: 'row'
+      flexDirection: 'row',
     },
   },
   detailsContainer: {
@@ -84,21 +101,19 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '50px',
     [theme.breakpoints.up('md')]: {
       fontSize: '36px',
-    lineHeight: '49px',
-    marginTop: '0px',
-
+      lineHeight: '49px',
+      marginTop: '0px',
     },
   },
   price: {
-    fontWeight:'600',
+    fontWeight: '600',
     fontSize: '18px',
     lineHeight: '24px',
     marginTop: '50px',
     [theme.breakpoints.up('md')]: {
       fontSize: '28px',
-    lineHeight: '49px',
-    marginTop: '10px',
-
+      lineHeight: '49px',
+      marginTop: '10px',
     },
   },
   title: {
@@ -112,7 +127,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '18px',
     lineHeight: '25px',
   },
-  qtyContainer:{
+  qtyContainer: {
     border: '0.5px solid #413D3D',
     boxSizing: 'border-box',
     display: 'flex',
@@ -120,8 +135,8 @@ const useStyles = makeStyles((theme) => ({
     padding: '2px',
     marginBottom: '20px',
     [theme.breakpoints.up('md')]: {
-    marginTop: '10px',
-    marginBottom: '0px',
+      marginTop: '10px',
+      marginBottom: '0px',
     },
   },
   quantity: {
@@ -129,23 +144,36 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '18px',
     lineHeight: '26px',
     maxWidth: '100px',
-    border: 'none'
+    border: 'none',
   },
   button: {
     background: '#F48A28',
-boxShadow: '15px 15px 50px rgba(0, 0, 0, 0.11), -30px -30px 50px rgba(255, 255, 255, 0.36)',
-borderRadius: '7px',
-border: 'none',
-color: '#fff',
-fontWeight: 'bold',
-fontSize: '16px',
-padding: '8px 12px',
-lineHeight: '28px',
-minWidth: '150px'
-  }
+    boxShadow:
+      '15px 15px 50px rgba(0, 0, 0, 0.11), -30px -30px 50px rgba(255, 255, 255, 0.36)',
+    borderRadius: '7px',
+    border: 'none',
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: '16px',
+    padding: '8px 12px',
+    lineHeight: '28px',
+    minWidth: '150px',
+  },
 }));
+
 const ProductDescription = () => {
   const classes = useStyles();
+  const router = useRouter();
+  const { data, loading, error } = useQuery(GET_PRODUCT_BY_ID, {
+    variables: {
+      id: router.query.id,
+    },
+  });
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error...</div>;
+  if (!data) return <div>No Products available</div>;
+  const { inventory_buyer_view } = data;
   return (
     <Layout>
       <Grid container className={classes.container}>
@@ -169,6 +197,7 @@ const ProductDescription = () => {
               <Grid item xs={12} md={4}>
                 <div className={classes.imageContainer}>
                   <img
+                    // TODO Change link
                     src={`https://images.pexels.com/photos/1767434/pexels-photo-1767434.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`}
                     alt={`Image`}
                     className={classes.img}
@@ -178,15 +207,16 @@ const ProductDescription = () => {
               <Grid item xs={12} md={8}>
                 <div className={classes.detailsContainer}>
                   <div className={classes.prodName}>
-                    3M 8000 3M 8812 Disposable Face Mask
+                    {inventory_buyer_view[0].name}
                   </div>
                   <div>
                     <div className={classes.price}>
-                      US $0.50 - 3.32/per unit
+                     {inventory_buyer_view[0].min_price} - {inventory_buyer_view[0].max_price}
                     </div>
                     <div className={classes.actionContainer}>
                       <div className={classes.qtyContainer}>
-                        Qty: <input className={classes.quantity} type="number" />
+                        Qty:{' '}
+                        <input className={classes.quantity} type="number" />
                       </div>
                       <button className={classes.button}>Add to Cart</button>
                     </div>
@@ -195,19 +225,14 @@ const ProductDescription = () => {
               </Grid>
             </Grid>
             <Grid container>
-              <div className={classes.title}>Description</div>
-              <div className={classes.desc}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                pharetra sit amet aliquam id diam maecenas. Dui vivamus arcu
-                felis bibendum ut tristique et egestas quis. Quis vel eros donec
-                ac odio tempor orci dapibus. Molestie at elementum eu facilisis
-                sed odio morbi. Et magnis dis parturient montes nascetur
-                ridiculus mus. Feugiat nisl pretium fusce id. Eleifend mi in
-                nulla posuere sollicitudin aliquam. Viverra adipiscing at in
-                tellus integer feugiat. Viverra adipiscing at in tellus integer
-                feugiat. Id aliquet lectus proin nibh nisl.
+              <Grid item xs={12}>
+                <div className={classes.title}>Description</div>
+              </Grid>
+              <Grid item xs={12}>
+                <div className={classes.desc}>
+                  {inventory_buyer_view[0].description}
               </div>
+                </Grid>
             </Grid>
           </div>
         </Grid>

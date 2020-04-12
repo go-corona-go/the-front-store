@@ -8,11 +8,13 @@ import ProductCard from '../components/ProductCard';
 
 const GET_ALL_PRODUCTS = gql`
   query getAllProducts($category: [String!]) {
-    inventory_items(where: {category: {_in: $category}}) {
+    inventory_buyer_view(where: {category: {_in: $category}}) {
       category
-      id
-      name
-      image_link
+    id
+    max_price
+    min_price
+    name
+    image_link
     }
   }
 `;
@@ -83,7 +85,7 @@ const Home = () => {
   if (error) return <div>Error...</div>;
   if (!data) return <div>No Products available</div>;
 
-  const { inventory_items } = data;
+  const { inventory_buyer_view } = data;
   return (
     <Layout>
       <Grid container>
@@ -107,7 +109,7 @@ const Home = () => {
             spacing={20}
             className={classes.sectionDesktop}
           >
-            {inventory_items.map((product) => (
+            {inventory_buyer_view.map((product) => (
               <ProductCard product={product} />
             ))}
           </GridList>
@@ -117,7 +119,7 @@ const Home = () => {
             spacing={20}
             className={classes.sectionMobile}
           >
-            {inventory_items.map((product) => (
+            {inventory_buyer_view.map((product) => (
               <ProductCard product={product} />
             ))}
           </GridList>

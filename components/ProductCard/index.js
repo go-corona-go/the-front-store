@@ -66,7 +66,8 @@ const ProductCard = ({ product }) => {
             />
           </div>
           <div className={classes.productName}>{product.name}</div>
-          <div className={classes.priceRange}>{product.priceRange}</div>
+          <div className={classes.priceRange}>{product.min_price} - 
+    ${product.max_price}</div>
         </div>
       </GridListTile>
     </Link>
