@@ -4,7 +4,6 @@ import { useState } from 'react';
 import Navbar from '../components/Navbar';
 import ProductCard from '../components/ProductCard';
 import { gql, useQuery } from '@apollo/client';
-import home from './home.svg';
 
 const GET_ALL_PRODUCTS = gql`
   query getAllProducts {
@@ -28,8 +27,21 @@ const useStyles = makeStyles(() => ({
     height: '500px',
     width: '100%',
     borderRadius: '0 0 55% 55%',
-    backgroundImage: 'url("./home.svg")',
-    backgroundPosition: '100% 100%',
+    backgroundImage: 'url("home.svg")',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    position: 'relative',
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: '4.5rem',
+    fontWeight: '700',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  p: {
+    margin: 0,
   },
   paper: {
     height: 140,
@@ -54,7 +66,10 @@ const Homepage = () => {
   return (
     <>
       <Navbar />
-      <div className={classes.banner}></div>
+      <div className={classes.banner}>
+        <p className={classes.p}>Together.</p>
+        <p className={classes.p}>We got this.</p>
+      </div>
       <div className={classes.root}>
         <section>
           <h1>Our Mission</h1>
