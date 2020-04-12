@@ -16,7 +16,7 @@ const Layout = (props) => (
   <ThemeProvider theme={theme}>
     <div>
       <NavBar />
-      {props.children}
+      <div style={{ padding: '0px 10px' }}>{props.children}</div>
     </div>
   </ThemeProvider>
 );
