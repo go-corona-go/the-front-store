@@ -2,9 +2,16 @@ const LS_KEY = "wtfo_cart";
 
 export const addToCart = (product) => {
   const currentData = localStorage.getItem(LS_KEY);
+  let isNewProduct = true;
   if (currentData) {
-    const updatedCart = JSON.parse(currentData);
-    updatedCart.push(product);
+    const updatedCart = JSON.parse(currentData).map((existingProduct) => {
+      if(product.id === existingProduct.id) {
+        existingProduct.item_units += product.item_units;
+        isNewProduct = false;
+      }
+      return existingProduct;
+    });
+    if(isNewProduct) updatedCart.push(product);
     localStorage.setItem(LS_KEY, JSON.stringify(updatedCart));
   } else {
     const updatedCart = [];
@@ -34,6 +41,7 @@ export const modifyQty = (id, item_units) => {
     if (product.id === id) {
       product.item_units = item_units;
     }
+    return product;
   });
   localStorage.setItem(LS_KEY, JSON.stringify(updatedCart));
 };

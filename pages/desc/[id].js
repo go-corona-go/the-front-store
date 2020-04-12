@@ -144,6 +144,7 @@ const useStyles = makeStyles((theme) => ({
   },
   quantity: {
     fontWeight: 'bold',
+    paddingLeft: '10px',
     fontSize: '18px',
     lineHeight: '26px',
     maxWidth: '100px',

@@ -35,11 +35,13 @@ export default function Navbar({cartLength}) {
                 <Logo />
               </Link>
             </div>
+            <Link href="/cart">
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge color="secondary" badgeContent={cartLength}>
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>
+            </Link>
           </div>
         </Toolbar>
       </AppBar>
