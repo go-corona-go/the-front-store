@@ -3,18 +3,18 @@ import { Grid, GridList, makeStyles } from '@material-ui/core';
 import { gql, useLazyQuery } from '@apollo/client';
 import { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
-import Filters, {CATEGORY_ENUM} from '../components/Filters';
+import Filters, { CATEGORY_ENUM } from '../components/Filters';
 import ProductCard from '../components/ProductCard';
 
 const GET_ALL_PRODUCTS = gql`
   query getAllProducts($category: [String!]) {
-    inventory_buyer_view(where: {category: {_in: $category}}) {
+    inventory_buyer_view(where: { category: { _in: $category } }) {
       category
-    id
-    max_price
-    min_price
-    name
-    image_link
+      id
+      max_price
+      min_price
+      name
+      image_link
     }
   }
 `;
@@ -72,11 +72,11 @@ const Home = () => {
     GET_ALL_PRODUCTS,
     {
       variables: {
-        category
-      }
+        category,
+      },
     }
   );
-  
+
   useEffect(() => {
     executeQuery();
   }, [category]);
@@ -97,7 +97,10 @@ const Home = () => {
           lg={2}
           className={isVisble ? classes.showForMobile : classes.showForDesktop}
         >
-          <Filters toggleFilter={toggleFilter} changeCategory={changeCategory} />
+          <Filters
+            toggleFilter={toggleFilter}
+            changeCategory={changeCategory}
+          />
         </Grid>
         <Grid container item xs={12} md={9} lg={10}>
           <p className={classes.link} onClick={() => toggleFilter(true)}>
