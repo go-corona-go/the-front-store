@@ -1,10 +1,9 @@
 import {
   createMuiTheme,
-  makeStyles,
   ThemeProvider,
 } from '@material-ui/core/styles';
 import { blue } from '@material-ui/core/colors';
-import NavBar from '../navbar';
+import NavBar from '../Navbar';
 
 const theme = createMuiTheme({
   palette: {
