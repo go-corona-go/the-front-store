@@ -1,30 +1,37 @@
-import { Grid, GridList, GridListTile, makeStyles } from '@material-ui/core';
+import { Grid, GridList, makeStyles } from '@material-ui/core';
 import { useState } from 'react';
 import Layout from '../components/Layout';
 import Filters from '../components/Filters';
+import ProductCard from '../components/ProductCard';
 
 const data = [
   {
+    id: 1,
     name: 'Very bvery big name',
     priceRange: 'SU @1000 - $2000',
   },
   {
+    id: 2,
     name: 'Very bvery big name',
     priceRange: 'SU @1000 - $2000',
   },
   {
+    id: 3,
     name: 'Very bvery big name',
     priceRange: 'SU @1000 - $2000',
   },
   {
+    id: 4,
     name: 'Very bvery big name',
     priceRange: 'SU @1000 - $2000',
   },
   {
+    id: 5,
     name: 'Very bvery big name',
     priceRange: 'SU @1000 - $2000',
   },
   {
+    id: 6,
     name: 'Very bvery big name',
     priceRange: 'SU @1000 - $2000',
   },
@@ -40,13 +47,6 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       display: 'flex',
     },
-  },
-  tile: {
-    borderRadius: '20px',
-    padding: '20px!important',
-    boxSizing: 'border-box',
-    display: 'flex',
-    flexDirection: 'column',
   },
   link: {
     display: 'flex',
@@ -80,28 +80,6 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
     },
   },
-  img: {
-    maxHeight: '214px',
-    maxWidth: '214px',
-    height: '100%',
-    width: '100%',
-    objectFit: 'cover',
-    justifyContent: 'center',
-    textAlign: 'center'
-  },
-  productName: {
-    fontSize: '14px',
-    lineHeight: '19px',
-    color: '#000000',
-    marginBottom: '12px',
-    marginTop: '12px'
-  },
-  priceRange: {
-    fontWeight: '600',
-    fontSize: '14px',
-    lineHeight: '19px',
-    color: '#000000',
-  },
 }));
 
 const Home = () => {
@@ -131,31 +109,7 @@ const Home = () => {
             className={classes.sectionDesktop}
           >
             {data.map((product) => (
-              <GridListTile
-                className={classes.tile}
-                key={product.name}
-                cols={1}
-              >
-                <div
-                  style={{
-                    background: '#fff',
-                    width: '100%',
-                    height: '100%',
-                    padding: '20px',
-                    boxSizing: 'border-box'
-                  }}
-                >
-                    <div style={{display: 'flex',alignItems:'center', height: '214px', maxHeight: '214px', width: '100%', justifyContent: 'center'}}>
-                  <img
-                    src={`https://images.pexels.com/photos/1767434/pexels-photo-1767434.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`}
-                    alt={product.name}
-                    className={classes.img}
-                  />
-                  </div>
-                  <div className={classes.productName}>{product.name}</div>
-                  <div>{product.priceRange}</div>
-                </div>
-              </GridListTile>
+              <ProductCard product={product} />
             ))}
           </GridList>
           <GridList
@@ -164,16 +118,9 @@ const Home = () => {
             spacing={20}
             className={classes.sectionMobile}
           >
-            {data.map((tile) => (
-              <GridListTile key={tile.name} cols={1}>
-                <div>
-                  <img
-                    src={`https://dummyimage.com/250/ffffff/000000`}
-                    alt={tile.name}
-                    className={classes.img}
-                  />
-                </div>
-              </GridListTile>
+            {data.map((product) => (
+              <ProductCard product={product} />
+              
             ))}
           </GridList>
         </Grid>

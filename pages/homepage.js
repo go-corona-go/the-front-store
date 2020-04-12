@@ -1,7 +1,8 @@
-import Navbar from '../components/Navbar';
-import ProductCard from '../components/product-card';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import { useState } from 'react';
+import Navbar from '../components/Navbar';
+import ProductCard from '../components/product-card';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -17,7 +18,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Homepage = () => {
-  const [spacing, setSpacing] = React.useState(1);
+  const [spacing, setSpacing] = useState(1);
   const classes = useStyles();
 
   const handleChange = (event) => {

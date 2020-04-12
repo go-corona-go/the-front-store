@@ -1,6 +1,5 @@
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import { makeStyles, Grid, Typography } from '@material-ui/core';
@@ -38,8 +37,8 @@ const Filters = ({toggleFilter}) => {
     <div className={classes.root}>
       <p className={classes.title}>Categories</p>
       <List component="nav">
-        {data.map((category) => (
-          <ListItem button className={classes.item} onClick={() => toggleFilter(false)}>
+        {data.map((category, i) => (
+          <ListItem button className={classes.item} key={i} onClick={() => toggleFilter(false)}>
             <ChevronRight className={classes.icon} />
             <ListItemText className={classes.text} primary={category} />
           </ListItem>
