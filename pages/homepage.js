@@ -1,23 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import ArrowForward from '@material-ui/icons/ArrowForward';
 import { useState } from 'react';
-import Navbar from '../components/Navbar';
 import ProductCard from '../components/ProductCard';
 import { gql, useQuery } from '@apollo/client';
-import ArrowForward from '@material-ui/icons/ArrowForward';
 import Link from 'next/link';
-
-// const GET_ALL_PRODUCTS = gql`
-//   query getAllProducts {
-//     inventory_items {
-//       id
-//       image_link
-//       name
-//       category
-//       description
-//     }
-//   }
-// `;
+import Layout from '../components/Layout';
 
 const GET_ALL_PRODUCTS = gql`
   query getAllProducts($category: [String!]) {
@@ -90,11 +78,11 @@ const Homepage = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error...</div>;
   if (!data) return <div>No Products available</div>;
+
   const { inventory_buyer_view } = data;
 
   return (
-    <>
-      <Navbar />
+    <Layout>
       <div className={classes.banner}>
         <p className={classes.p}>Together.</p>
         <p className={classes.p}>We got this.</p>
@@ -116,7 +104,6 @@ const Homepage = () => {
         </section>
         <section>
           <h1>Products</h1>
-
           <Grid container className={classes.root} spacing={2}>
             <Grid item xs={12}>
               <Grid container justify="flex-start" spacing={spacing}>
@@ -138,7 +125,7 @@ const Homepage = () => {
           </div>
         </Link>
       </div>
-    </>
+    </Layout>
   );
 };
 
