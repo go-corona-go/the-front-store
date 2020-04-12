@@ -7,14 +7,27 @@ import { gql, useQuery } from '@apollo/client';
 import ArrowForward from '@material-ui/icons/ArrowForward';
 import Link from 'next/link';
 
+// const GET_ALL_PRODUCTS = gql`
+//   query getAllProducts {
+//     inventory_items {
+//       id
+//       image_link
+//       name
+//       category
+//       description
+//     }
+//   }
+// `;
+
 const GET_ALL_PRODUCTS = gql`
-  query getAllProducts {
-    inventory_items {
-      id
-      image_link
-      name
+  query getAllProducts($category: [String!]) {
+    inventory_buyer_view(limit: 4) {
       category
-      description
+      id
+      max_price
+      min_price
+      name
+      image_link
     }
   }
 `;
@@ -77,7 +90,7 @@ const Homepage = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error...</div>;
   if (!data) return <div>No Products available</div>;
-  const { inventory_items } = data;
+  const { inventory_buyer_view } = data;
 
   return (
     <>
@@ -107,7 +120,7 @@ const Homepage = () => {
           <Grid container className={classes.root} spacing={2}>
             <Grid item xs={12}>
               <Grid container justify="flex-start" spacing={spacing}>
-                {inventory_items.map((product) => (
+                {inventory_buyer_view.map((product) => (
                   <Grid key={product.id} item>
                     <ProductCard product={product} />
                   </Grid>
