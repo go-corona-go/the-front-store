@@ -23,8 +23,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   img: {
-    maxHeight: '133',
-    maxWidth: '133',
+    maxHeight: '133px',
+    maxWidth: '133px',
     height: '100%',
     width: '100%',
     objectFit: 'cover',
@@ -117,6 +117,7 @@ const useStyles = makeStyles((theme) => ({
     boxSizing: 'border-box',
     display: 'flex',
     alignSelf: 'center',
+    padding: '2px',
     marginBottom: '20px',
     [theme.breakpoints.up('md')]: {
     marginTop: '10px',
