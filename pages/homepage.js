@@ -42,6 +42,7 @@ const useStyles = makeStyles(() => ({
   },
   p: {
     margin: 0,
+    padding: '10px',
   },
   paper: {
     height: 140,
