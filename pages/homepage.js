@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Navbar from '../components/Navbar';
 import ProductCard from '../components/ProductCard';
 import { gql, useQuery } from '@apollo/client';
+import home from './home.svg';
 
 const GET_ALL_PRODUCTS = gql`
   query getAllProducts {
@@ -27,6 +28,8 @@ const useStyles = makeStyles(() => ({
     height: '500px',
     width: '100%',
     borderRadius: '0 0 55% 55%',
+    backgroundImage: 'url("./home.svg")',
+    backgroundPosition: '100% 100%',
   },
   paper: {
     height: 140,
