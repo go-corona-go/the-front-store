@@ -1,6 +1,5 @@
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import { makeStyles, Grid, Typography } from '@material-ui/core';
@@ -31,15 +30,24 @@ const useStyles = makeStyles(() => ({
   icon: {},
 }));
 
-const data = ['Mask', 'PPE', 'Gloves', 'Sanitation Products'];
-const Filters = ({toggleFilter}) => {
+export const CATEGORY_ENUM = ['Mask', 'Sanitizer'];
+
+const Filters = ({ toggleFilter, changeCategory }) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
       <p className={classes.title}>Categories</p>
       <List component="nav">
-        {data.map((category) => (
-          <ListItem button className={classes.item} onClick={() => toggleFilter(false)}>
+        {CATEGORY_ENUM.map((category, i) => (
+          <ListItem
+            button
+            className={classes.item}
+            key={i}
+            onClick={() => {
+              changeCategory([`${category}`]);
+              toggleFilter(false);
+            }}
+          >
             <ChevronRight className={classes.icon} />
             <ListItemText className={classes.text} primary={category} />
           </ListItem>
