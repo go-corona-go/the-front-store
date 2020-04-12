@@ -5,6 +5,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Logo from './logo.svg';
+import Link from 'next/link';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function Navbar() {
   const classes = useStyles();
   return (
     <div className={classes.grow}>
@@ -30,7 +31,9 @@ export default function PrimarySearchAppBar() {
         <Toolbar>
           <div className={classes.container}>
             <div className={classes.image}>
-              <Logo />
+              <Link href="/">
+                <Logo />
+              </Link>
             </div>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge color="secondary">
