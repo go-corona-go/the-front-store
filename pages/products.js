@@ -5,6 +5,8 @@ import { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import Filters, {CATEGORY_ENUM} from '../components/Filters';
 import ProductCard from '../components/ProductCard';
+import Loader from '../components/Loader';
+import Error from '../components/Error';
 
 const GET_ALL_PRODUCTS = gql`
   query getAllProducts($category: [String!]) {
@@ -81,9 +83,9 @@ const Home = () => {
     executeQuery();
   }, [category]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error...</div>;
-  if (!data) return <div>No Products available</div>;
+  if (loading) return <Layout><Loader /></Layout>;
+  if (error) return <Layout><Error text="Something went wrong" /></Layout>;
+  if (!data) return <Layout><Error text="No Products Available" /></Layout>;
 
   const { inventory_buyer_view } = data;
   return (

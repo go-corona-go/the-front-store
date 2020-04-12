@@ -6,6 +6,8 @@ import ProductCard from '../components/ProductCard';
 import { gql, useQuery } from '@apollo/client';
 import Link from 'next/link';
 import Layout from '../components/Layout';
+import Loader from '../components/Loader';
+import Error from '../components/Error';
 
 const GET_ALL_PRODUCTS = gql`
   query getAllProducts($category: [String!]) {
@@ -75,9 +77,9 @@ const Homepage = () => {
 
   const { data, loading, error } = useQuery(GET_ALL_PRODUCTS);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error...</div>;
-  if (!data) return <div>No Products available</div>;
+  if (loading) return <Layout><Loader /></Layout>;
+  if (error) return <Layout><Error text="Something went wrong" /></Layout>;
+  if (!data) return <Layout><Error text="No Products Available" /></Layout>;
 
   const { inventory_buyer_view } = data;
 

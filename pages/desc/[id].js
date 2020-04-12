@@ -8,6 +8,8 @@ import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
 import { addToCart } from '../../utils/cart-utils';
 import { CartContext } from '../_app';
+import Loader from '../../components/Loader';
+import Error from '../../components/Error';
 
 const GET_PRODUCT_BY_ID = gql`
   query getProductById($id: Int!) {
@@ -176,9 +178,9 @@ const ProductDescription = () => {
     },
   });
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error...</div>;
-  if (!data) return <div>No Products available</div>;
+  if (loading) return <Layout><Loader /></Layout>;
+  if (error) return <Layout><Error text="Something went wrong" /></Layout>;
+  if (!data) return <Layout><Error text="No Product Details Available" /></Layout>;
   const { inventory_buyer_view } = data;
   const addCart = () => {
     const product = {
