@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Navbar() {
+export default function Navbar({cartLength}) {
   const classes = useStyles();
   return (
     <div className={classes.grow}>
@@ -36,7 +36,7 @@ export default function Navbar() {
               </Link>
             </div>
             <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge color="secondary">
+              <Badge color="secondary" badgeContent={cartLength}>
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>

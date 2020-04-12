@@ -1,10 +1,13 @@
 /* eslint-disable babel/camelcase */
 import { Grid, makeStyles } from '@material-ui/core';
+import { useState, useContext } from 'react';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import Link from 'next/link';
 import { gql, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
+import { addToCart } from '../../utils/cart-utils';
+import { CartContext } from '../_app';
 
 const GET_PRODUCT_BY_ID = gql`
   query getProductById($id: Int!) {
@@ -162,8 +165,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProductDescription = () => {
+  const {refreshCart} = useContext(CartContext);
   const classes = useStyles();
   const router = useRouter();
+  const [item_units, setQty] = useState(0);
   const { data, loading, error } = useQuery(GET_PRODUCT_BY_ID, {
     variables: {
       id: router.query.id,
@@ -174,6 +179,16 @@ const ProductDescription = () => {
   if (error) return <div>Error...</div>;
   if (!data) return <div>No Products available</div>;
   const { inventory_buyer_view } = data;
+  const addCart = () => {
+    const product = {
+      ...inventory_buyer_view[0],
+      item_units
+    }
+    if(Number(item_units) <= 0) return;
+    addToCart(product);
+    setQty(0)
+    refreshCart();
+  }
   return (
     <Layout>
       <Grid container className={classes.container}>
@@ -217,9 +232,9 @@ const ProductDescription = () => {
                     <div className={classes.actionContainer}>
                       <div className={classes.qtyContainer}>
                         Qty:{' '}
-                        <input className={classes.quantity} type="number" />
+                        <input value={item_units} onChange={e => setQty(Number(e.target.value))} className={classes.quantity} type="number" />
                       </div>
-                      <button className={classes.button}>Add to Cart</button>
+                      <button onClick={() => addCart()} className={classes.button} >Add to Cart</button>
                     </div>
                   </div>
                 </div>
